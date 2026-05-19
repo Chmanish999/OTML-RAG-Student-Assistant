@@ -1,0 +1,128 @@
+============================================================
+Practical 7: Convex Optimization
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-7-Convex-Optimization-Global-Minimum
+
+Related PPT Section:
+Convex Optimization
+
+Keywords:
+convex function; global minimum; local minimum; convex region; feasible region; optimization guarantee
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 7: Convex Optimization and Global Minimum
+
+## 1. Aim
+
+The aim of this practical is to understand convex optimization and the concept of a global minimum using cost-function visualization.
+
+In this practical, students visualize a simple convex function and observe why convex optimization is important in machine learning. The practical helps students understand that in convex optimization, every local minimum is also a global minimum.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Convex Optimization and Global Minimum
+
+This practical is mapped with Module 1 of OTML, where students study model fitting, error measurement, cost functions, optimization behaviour, and the role of convexity in machine learning.
+
+---
+
+## 3. Theory Background
+
+Convex optimization refers to optimization problems where the objective function is convex and the feasible region is convex.
+
+A function is called convex if the line segment joining any two points on the curve lies above or on the curve.
+
+In simple terms, a convex function has a bowl-shaped structure. This shape is very useful in optimization because it avoids multiple misleading local minima.
+
+A very simple convex function is:
+
+```text
+f(x) = x²
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Code Cell 5 ---
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+--- Code Cell 6 ---
+def f(x):
+    return x**2
+
+--- Code Cell 7 ---
+x = np.linspace(-10, 10, 400)
+
+y = f(x)
+
+--- Code Cell 8 ---
+plt.figure(figsize=(8,5))
+
+plt.plot(x, y)
+
+plt.xlabel("x")
+
+plt.ylabel("f(x)")
+
+plt.title("Convex Function: f(x) = x²")
+
+plt.grid(True)
+
+plt.show()
+
+--- Code Cell 9 ---
+minimum_x = 0
+
+minimum_y = f(minimum_x)
+
+print("Global Minimum at:")
+
+print("x =", minimum_x)
+
+print("f(x) =", minimum_y)
+
+--- Markdown Cell 10 ---
+Only one minimum exists
+Gradient Descent always reaches optimal solution.
+
+--- Code Cell 11 ---
+plt.figure(figsize=(8,5))
+
+plt.plot(x, y)
+
+plt.scatter(minimum_x, minimum_y, s=100)
+
+plt.xlabel("x")
+
+plt.ylabel("f(x)")
+
+plt.title("Global Minimum of Convex Function")
+
+plt.grid(True)
+
+plt.show()
+
+--- Markdown Cell 12 ---
+The convex function has a single global minimum.
+Gradient descent can reliably converge to this minimum.
+Convex optimization provides stable and efficient learning in machine learning models.
+
+--- Markdown Cell 13 ---
+Convex optimization forms the mathematical foundation of:
+| ML Technique        | Importance          |
+| ------------------- | ------------------- |
+| Linear Regression   | Convex loss         |
+| Logistic Regression | Convex cost         |
+| SVM                 | Convex optimization |
+| Regularization      | Convex penalties    |

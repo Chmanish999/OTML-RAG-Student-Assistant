@@ -1,0 +1,107 @@
+============================================================
+Practical 5: Gradient Descent
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-5-Gradient-Descent
+
+Related PPT Section:
+Gradient Descent
+
+Keywords:
+gradient descent; learning rate; gradient; cost function; parameter update; iteration
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 5: Gradient Descent
+
+## 1. Aim
+
+The aim of this practical is to understand Gradient Descent as an optimization technique used for learning the parameter of a simple machine learning model.
+
+In this practical, students implement Gradient Descent for a simple linear model and observe how the parameter value is updated iteratively to reduce prediction error.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Gradient Descent for Linear Model Parameter Learning
+
+This practical is mapped with Module 1 of OTML, where students study model fitting, error measurement, parameter estimation, and optimization-based learning.
+
+---
+
+## 3. Theory Background
+
+Gradient Descent is one of the most important optimization algorithms used in machine learning.
+
+In machine learning, a model makes predictions using some parameters. Initially, these parameters may not be correct. Because of this, the model may produce inaccurate predictions.
+
+Gradient Descent improves the parameter values step by step so that the prediction error becomes smaller.
+
+In this practical, a simple linear model is considered:
+
+```text
+ŷ = θx
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Code Cell 6 ---
+import numpy as np
+import matplotlib.pyplot as plt
+
+--- Code Cell 7 ---
+x = np.array([1, 2, 3])
+
+y = np.array([3, 6, 9])
+
+--- Code Cell 8 ---
+theta = 0
+
+learning_rate = 0.1
+
+iterations = 15
+
+n = len(x)
+
+cost_history = []
+
+--- Code Cell 9 ---
+for i in range(iterations):
+
+    y_pred = theta * x
+
+    error = y_pred - y
+
+    cost = (1/n) * np.sum(error**2)
+
+    gradient = (2/n) * np.sum(error * x)
+
+    theta = theta - learning_rate * gradient
+
+    cost_history.append(cost)
+
+    print(f"Iteration {i+1}")
+    print("Theta:", theta)
+    print("Cost:", cost)
+    print("----------------")
+
+--- Code Cell 10 ---
+print("Final Theta:", theta)
+
+--- Code Cell 11 ---
+plt.plot(cost_history)
+
+plt.xlabel("Iterations")
+
+plt.ylabel("Cost")
+
+plt.title("Gradient Descent Cost Reduction")
+
+plt.show()

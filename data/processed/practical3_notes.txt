@@ -1,0 +1,142 @@
+============================================================
+Practical 3: Empirical Risk Minimization
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-3-Empirical-Risk-Minimization
+
+Related PPT Section:
+Empirical Risk Minimization
+
+Keywords:
+ERM; empirical risk; true risk; loss function; training error; generalization; optimization
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 3: Empirical Risk Minimization (ERM)
+
+
+
+## 1. Aim
+
+
+
+The aim of this practical is to understand the concept of Empirical Risk Minimization (ERM) and implement it using a simple Music Genre Recommendation System.
+
+
+
+In this practical, students train a supervised machine learning model and calculate how prediction performance is related to empirical risk. The practical helps students understand that machine learning models try to minimize prediction error on training or testing data.
+
+
+
+---
+
+
+
+## 2. Course and Module Mapping
+
+
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+
+**Module:** Module 1 – Model Fitting and Error Measurement
+
+**Practical Topic:** Empirical Risk Minimization using a Music Genre Recommendation System
+
+
+
+This practical is mapped with Module 1 of OTML, where students study model fitting, error measurement, empirical risk, prediction accuracy, and optimization-based learning.
+
+
+
+---
+
+
+
+## 3. Theory Background
+
+
+
+Empirical Risk Minimization, commonly called ERM, is one of the most important principles in machine learning.
+
+
+
+In machine learning, **risk** means prediction error or loss. The true risk is the expected error of a model on the complete real-world data distribution. However, in practice, we do not have access to the complete data distribution. We only have a finite training dataset.
+
+
+
+Therefore, we calculate error on the available dataset. This is called **empirical risk**.
+
+
+
+Empirical risk means the average loss calculated over the available training examples.
+
+
+
+In simple terms:
+
+
+
+```text
+
+Empirical Risk = Average prediction error on available data
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Markdown Cell 2 ---
+The ML algorithm tries to:
+
+Minimize Empirical Risk
+
+This process is called:
+
+Empirical Risk Minimization (ERM)
+
+--- Code Cell 3 ---
+import pandas as pd
+
+from sklearn.tree import DecisionTreeClassifier
+
+from sklearn.metrics import accuracy_score
+
+--- Code Cell 4 ---
+df = pd.read_csv("music1.csv")
+
+df.head()
+
+--- Code Cell 5 ---
+X = df[["age", "gender"]]
+
+y = df["gener"]
+
+--- Code Cell 6 ---
+model = DecisionTreeClassifier()
+
+model.fit(X, y)
+
+--- Code Cell 7 ---
+y_pred = model.predict(X)
+
+--- Code Cell 8 ---
+accuracy = accuracy_score(y, y_pred)
+
+print("Training Accuracy:", accuracy)
+
+--- Code Cell 9 ---
+risk = 1 - accuracy
+
+print("Empirical Risk:", risk)
+
+--- Markdown Cell 10 ---
+| Risk Value | Interpretation         |
+| ---------- | ---------------------- |
+| 0.0        | No training error      |
+| 0.2        | 20% training error     |
+| 0.5        | Large prediction error |
+
+--- Markdown Cell 12 ---
+# Machine Learning = Optimization + Error Minimization

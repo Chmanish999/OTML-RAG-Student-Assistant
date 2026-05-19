@@ -1,0 +1,745 @@
+===== Slide 1 =====
+A8751 – Optimization Techniques in Machine Learning
+Course Overview:
+The students will be able to understand and analyze how to deal with changing data. They will also be able to identify and interpret potential unintended effects in your project. They will understand and define procedures to operationalize and maintain your applied machine learning model.
+Prepared by : Manish Chhabra ,MSc. CS, MCA Gold Medalist, M. Tech. CSE,
+PhD. CSE(Cloud Computing using ML/NLP)**
+===== Slide 2 =====
+Strong mathematical prerequisites to be clear by  the students  themselves  for understanding  this A8751 Optimization Techniques in ML  subject for all of you -
+===== Slide 3 =====
+Strong mathematical prerequisites to be clear by  the students  themselves  for understanding  this A8751 Optimization Techniques in ML  subject for all of you -
+===== Slide 4 =====
+Strong mathematical prerequisites to be clear by  the students  themselves  for understanding  this A8751 Optimization Techniques in ML  subject for all of you -
+===== Slide 5 =====
+Course Outcomes
+A8751.1. Understand the fundamentals of model fitting, empirical risk minimization, and optimization techniques including gradient descent and Lagrange multipliers.
+A8751.2. Formulate linear regression as an optimization problem and apply parameter estimation techniques including Bayesian and Maximum Likelihood methods.
+A8751.3. Apply dimensionality reduction techniques such as PCA using optimization-based approaches and understand the mathematical foundations of eigenvector computation.
+A8751.4. Analyze unsupervised learning problems using Gaussian Mixture Models and the Expectation Maximization algorithm for parameter estimation.
+A8751.5. Evaluate and implement large-margin classifiers including Support Vector Machines using primal and dual optimization frameworks and kernel methods.
+===== Slide 6 =====
+Syllabus
+Module 1: Model Fitting and Error Measurement
+Optimization Using Gradient Descent, Constrained Optimization and Lagrange Multipliers, Convex Optimization, Data, Models, and Learning, Empirical Risk Minimization, Parameter Estimation, Probabilistic Modelling and Inference Directed Graphical Models.
+Module 2: Linear Regression as an Optimization Problem
+Problem Formulation, Parameter Estimation, Bayesian Linear Regression, Maximum Likelihood as Orthogonal Projection
+Module 3: Dimensionality Reduction and Optimization
+Problem Setting, Maximum Variance Perspective, Projection Perspective, Eigenvector Computation and Low-Rank Approximations, PCA in High Dimensions, Key Steps of PCA in Practice, Latent Variable Perspective
+===== Slide 7 =====
+Module 4: Unsupervised Learning and Expectation Maximization
+Problem Setting, Maximum Variance Perspective, Projection Perspective, Eigenvector Computation and Low-Rank Approximations, PCA in High Dimensions, Key Steps of PCA in Practice, Latent Variable Perspective
+Module 5: Large-Margin Classification and Dual Optimization
+Separating Hyperplanes, Primal Support Vector Machine, Dual Support Vector Machine, Kernels Numerical Solution
+Text Book –
+1.Mathematics for Machine Learning by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong, 1st Edition, Cambridge University Press, Paperback, 23 April 2020, ISBN-13: 978-1108455145, Language: English, 398 pages.
+Reference Book:
+1.Convex Optimization by Stephen Boyd and Lieven Vandenberghe, 1st Edition, Cambridge University Press, Hardcover, March 2004, ISBN-13: 978-0521833783, Language: English, 730 pages.
+2. Optimization for Machine Learning, Suvrit Sra, Sebastian Nowozin and Stephen J.
+Wright, MIT Press, 2011.
+===== Slide 8 =====
+Module 1: Model Fitting and Error Measurement
+Optimization Using Gradient Descent, Constrained Optimization and Lagrange Multipliers, Convex Optimization, Data, Models, and Learning, Empirical Risk Minimization, Parameter Estimation, Probabilistic Modelling and Inference Directed Graphical Models.
+===== Slide 9 =====
+[No readable text found on this slide]
+===== Slide 10 =====
+E = Experience (e.g., training data)
+T = Task (e.g., classification, prediction)
+P = Performance Measure (e.g., accuracy, MSE)
+===== Slide 11 =====
+“Optimization is the mathematical foundation that
+allows machine learning algorithms to learn from data.”
+In ML, a model has parameters like weights in linear regression or neural networks). Optimization helps find the best values for these parameters so the model performs well.
+===== Slide 12 =====
+“In machine learning, we define a loss function that tells us how bad a model's predictions are, and optimization helps find the parameters that minimize this loss.”
+===== Slide 13 =====
+[No readable text found on this slide]
+===== Slide 14 =====
+[No readable text found on this slide]
+===== Slide 15 =====
+What do we mean by data in machine learning?
+Answer:
+In ML, data is the foundation of learning. It consists of examples or observations from which the model learns patterns.
+===== Slide 16 =====
+Numerical Data:
+Numerical data consists of numbers and can be further classified into two subtypes:
+Continuous Data: Continuous data can take any real value within a specific range. Examples include height, weight, temperature, and time.
+Discrete Data: Discrete data can only take specific, distinct values. Examples include counts of objects, scores on a test, and the number of items sold.
+Categorical Data:
+Categorical data represents categories or labels and can be further classified into two subtypes:
+Ordinal Data: Ordinal data has a natural ordering or hierarchy between categories. Examples include rankings (e.g., "low," "medium," "high") and survey responses (e.g., "strongly disagree," "disagree," "neutral," "agree," "strongly agree").
+Nominal Data: Nominal data consists of categories with no inherent order or hierarchy. Examples include colors, gender, nationality, and types of animals.
+===== Slide 17 =====
+Tools in Machine Learning,
+Text Data:
+Text data consists of sequences of characters or words and is commonly encountered in natural language processing (NLP) tasks. Examples include text documents, emails, tweets, and customer reviews.
+Image Data:
+Image data consists of visual representations of objects, scenes, or patterns. Each image is typically composed of pixels, with each pixel representing a color value. Image data is commonly used in computer vision tasks such as object detection, image classification, and image segmentation.
+Audio Data:
+Audio data consists of sound waveforms recorded over time. Each audio sample represents the intensity of sound at a specific time point. Audio data is used in tasks such as speech recognition, speaker identification, and emotion detection.
+===== Slide 18 =====
+Tools in Machine Learning,
+Time Series Data:
+Time series data consists of observations collected at regular intervals over time. Each data point is associated with a timestamp or time index. Time series data is commonly encountered in forecasting tasks, stock market analysis, weather prediction, and sensor data monitoring.
+Understanding the types of data present in a dataset is crucial for selecting appropriate data preprocessing techniques, feature engineering methods, and machine learning algorithms.
+===== Slide 19 =====
+[No readable text found on this slide]
+===== Slide 20 =====
+Machine Learning Categories
+Supervised Learning: Uses labeled data to train models for predictions or classifications.
+Unsupervised Learning: Identifies patterns and relationships in unlabeled data.
+Reinforcement Learning: Trains agents by rewarding desired actions and penalizing undesired ones
+Supervised Learning
+A. Classification Algorithms:
+Logistic Regression: Predicts categorical outcomes using a logistic function.
+Naive Bayes Classifier: Uses Bayes’ theorem for probabilistic classification.
+K-Nearest Neighbor (KNN): Classifies data points based on their proximity to neighbours.
+Support Vector Machine (SVM): Finds the best hyperplane to classify data.
+Example: Email spam detection, speech recognition.
+B. Regression Algorithms:
+Linear Regression: Models the relationship between variables by fitting a straight line.
+Ridge Regression: Adds regularization to linear regression to prevent overfitting.
+Ordinary Least Squares (OLS): Minimizes the sum of squared differences between observed and predicted values.
+Stepwise Regression: Sequentially adds or removes predictors to improve the model.
+Example: Stock market prediction, rainfall prediction.
+===== Slide 21 =====
+2. Unsupervised Learning
+A. Clustering Algorithms:
+K-Means: Groups data into clusters based on similarity and minimizes intra-cluster variance.
+K-Median: Similar to K-Means but minimizes median distance instead of variance.
+Hierarchical Clustering: Creates a hierarchy of clusters using dendrograms.
+Expectation-Maximization: Alternates between expectation and maximization steps to cluster data probabilistically.
+Example: Identifying fake news, document analysis.
+B. Association Analysis:
+APRIORI: Finds frequent itemsets in a dataset and derives association rules.
+Eclat: A faster variation of APRIORI using depth-first search.
+FP-Growth: Efficiently discovers frequent itemsets using a tree-based approach.
+Example: Market basket analysis
+C. Dimensionality Reduction:
+Feature Extraction:
+Principal Component Analysis (PCA): Reduces dimensions by transforming features into principal components.
+Feature Selection:
+Wrapper: Selects features by evaluating subsets.
+Filter: Selects features based on statistical properties.
+Embedded Method: Performs feature selection during model training.
+Example: Analysis of written texts and DNA microarray data.
+===== Slide 22 =====
+3. Reinforcement Learning
+A. Model-Free Methods:
+Q-Learning: Uses Q-values to learn optimal actions in an environment.
+Hybrid: Combines model-free methods with other strategies.
+Policy Optimization: Optimizes a policy directly for better decision-making.
+B. Model-Based Methods:
+Learn the Model: Creates an explicit model of the environment for decision-making.
+Given the Model: Uses a pre-existing model to optimize actions.
+Example: Multi-agent systems, motion planning, navigation
+===== Slide 23 =====
+[No readable text found on this slide]
+===== Slide 24 =====
+Data Collection :Once you have your idea of what you want the machine to learn about you to have to do the first main step in the process of machine learning. This is collecting data. This step is crucial and needs to be done well because the quality and quantity of the data you collect have a huge impact on the final result.
+Data Exploration :is examining data to identify patterns and make sense of them in the context of your problem. This is often called a “true data science” stage because it’s where you get down to business by looking at the raw facts and figures without any preconceived notions about what they might mean.
+The step involves looking at the available data in different ways — for example, by adding new variables or changing existing ones — and then seeing if there are any interesting relationships between those variables.
+===== Slide 25 =====
+DATA PREPARATION:
+Handle missing values: Determine the best approach for dealing with missing data, such as imputation or deletion.
+Remove duplicates: Identify and remove duplicate records from the dataset. Identify relevant features: Select features that are most likely to contribute to the predictive model and remove irrelevant ones.
+Dimensionality reduction: Use techniques like Principal Component Analysis (PCA) to reduce the number of features while retaining as much information as possible. Encoding categorical variables: Convert categorical variables into numerical format using techniques like one-hot encoding or label encoding.
+===== Slide 26 =====
+DATA PREPARATION continued……:
+Scaling features: Scale numerical features to a similar range to prevent certain features from dominating others during model training. Address class imbalance: If the dataset has imbalanced classes, use techniques like oversampling, undersampling, or synthetic data generation to balance the classes.
+Split the dataset: Divide the dataset into training, validation, and test sets to evaluate model performance.
+===== Slide 27 =====
+MODELLING :is the process of transforming raw data into a form suitable for analysis and model development. It is one of the most critical steps in determining the success of the final model.
+EVUALATION :
+Once the model is trained, it is essential to evaluate the model and understand how to interpret the results before deploying it.
+One of the methods of evaluating models is through cross-validation.
+In this process, you train the model on some datasets and then test its performance on a completely different training set before using it on actual data. This helps to ensure that your dataset isn’t biased in any way and helps ensure that your model will work well in practice.
+===== Slide 28 =====
+What is a model in machine learning?
+A model is a mathematical function or hypothesis that maps input data to output predictions.
+It is parameterized by a vector θ.
+===== Slide 29 =====
+Why Optimization Techniques Are Essential in Machine Learning:
+Machine learning models, despite being more flexible and data-driven than traditional programming, fundamentally rely on optimization………
+The core task in most machine learning algorithms is to find the best parameters that minimize some measure of error or maximize performance.
+This process is an optimization problem.
+===== Slide 30 =====
+Machine Learning as an Optimization Process
+Every supervised machine learning algorithm can be formulated as solving an optimization problem.
+For example:
+===== Slide 31 =====
+Linear regression aims to minimize the mean squared error.
+Logistic regression aims to minimize cross-entropy loss.
+Support vector machines aim to  maximize the margin between classes.
+Neural networks aim to minimize a complex loss function using gradient-based methods.
+Thus, the core of “learning” in machine learning is
+an optimization process.
+===== Slide 32 =====
+Optimization Enables Generalization
+Optimization is not just about minimizing the training loss. With techniques like regularization (Ridge, LASSO), we use optimization to find models that generalize well to unseen data.
+This helps in managing the bias–variance trade-off and reduces overfitting
+===== Slide 33 =====
+Optimization is Embedded in Most ML Algorithms
+Here are examples of optimization in popular algorithms:
+Neural networks: Trained via backpropagation using gradient descent.
+SVM: Solved using quadratic programming.
+K-means clustering: Minimizes intra-cluster variance.
+PCA: Involves maximizing variance (eigenvalue optimization).
+Reinforcement learning: Optimizes a reward function over time.
+===== Slide 34 =====
+Optimization is not a separate step in machine learning—it is the very essence of how machine learning models are trained.
+Without optimization techniques, machine learning algorithms would not be able to learn from data !!
+===== Slide 35 =====
+What is learning?
+Answer:
+Learning is the process of adjusting the model parameters θ to minimize the discrepancy between predicted and actual output.
+We define a loss function L( y, fθ(x)) then optimize it over the dataset.
+What kinds of learning exist?
+Supervised Learning: Input–output pairs are known. (e.g., classification, regression)
+Unsupervised Learning: Only inputs x, no outputs. (e.g., clustering, PCA)
+Semi-supervised Learning: Few labels available
+Reinforcement Learning: Learning via rewards and penalties from environment
+===== Slide 36 =====
+Write the model equation in the form y=θx
+Derive the optimal value of θ that minimizes the Mean Squared Error (MSE)
+Calculate the final MSE using the optimal
+===== Slide 37 =====
+[No readable text found on this slide]
+===== Slide 38 =====
+[No readable text found on this slide]
+===== Slide 39 =====
+Write the model equation in the form y=θx
+Derive the optimal value of θ that minimizes the Mean Squared Error (MSE)
+Calculate the final MSE using the optimal
+===== Slide 40 =====
+design matrix is a matrix that contains all the input feature values for the training data. It is structured so that each row represents one training example, and each column represents a feature.
+===== Slide 41 =====
+[No readable text found on this slide]
+===== Slide 42 =====
+Normal Equation Derivation in Linear Regression
+===== Slide 43 =====
+[No readable text found on this slide]
+===== Slide 44 =====
+[No readable text found on this slide]
+===== Slide 45 =====
+[No readable text found on this slide]
+===== Slide 46 =====
+Goal :Find values of θ (intercept) and θ1 (slope) that minimize the Mean Squared Error (MSE)
+loss function. In linear regression, the loss function we want to minimize is the Mean Squared Error (MSE) between the predicted values y^ and the actual values y.
+Gradient Descent is an optimization algorithm used to minimize a loss function by iteratively updating model parameters in the opposite direction of the gradient (slope)
+===== Slide 47 =====
+[No readable text found on this slide]
+===== Slide 48 =====
+[No readable text found on this slide]
+===== Slide 49 =====
+[No readable text found on this slide]
+===== Slide 50 =====
+[No readable text found on this slide]
+===== Slide 51 =====
+[No readable text found on this slide]
+===== Slide 52 =====
+[No readable text found on this slide]
+===== Slide 53 =====
+[No readable text found on this slide]
+===== Slide 54 =====
+Empirical Risk Minimization (ERM)
+What does “risk” mean in machine learning?
+Answer-
+In ML, risk (Generalization Error) refers to how well the model performs — more precisely, how much error or loss it makes on average when predicting.
+There are two types: True Risk /Empirical Risk
+===== Slide 55 =====
+[No readable text found on this slide]
+===== Slide 56 =====
+Empirical risk  (Training Error)-
+===== Slide 57 =====
+What is Empirical Risk Minimization (ERM)?
+===== Slide 58 =====
+What is Empirical Risk Minimization (ERM)?
+===== Slide 59 =====
+What is Empirical Risk Minimization (ERM)?
+===== Slide 60 =====
+[No readable text found on this slide]
+===== Slide 61 =====
+What is the role of optimization in ERM here…..(Optimization techniques in ML???
+ERM defines a cost function.
+We then use optimization techniques
+(e.g., gradient descent, stochastic gradient descent) to find the best model parameters θ∗
+ERM Example: Linear Regression with 2 Data Points
+===== Slide 62 =====
+[No readable text found on this slide]
+===== Slide 63 =====
+Step 1: Define the Empirical Risk (Cost Function)
+===== Slide 64 =====
+[No readable text found on this slide]
+===== Slide 65 =====
+[No readable text found on this slide]
+===== Slide 66 =====
+[No readable text found on this slide]
+===== Slide 67 =====
+[No readable text found on this slide]
+===== Slide 68 =====
+Conclusion on ERM :
+ERM minimizes training error only.
+True error is what we actually care about in real-world prediction settings.
+A model with low empirical risk does not guarantee low true risk unless it generalizes well.
+Optimization in ML (e.g., minimizing ERM) should always be coupled with evaluation techniques (test set, cross-validation) to estimate true error.
+===== Slide 69 =====
+[No readable text found on this slide]
+===== Slide 70 =====
+[No readable text found on this slide]
+===== Slide 71 =====
+[No readable text found on this slide]
+===== Slide 72 =====
+[No readable text found on this slide]
+===== Slide 73 =====
+[No readable text found on this slide]
+===== Slide 74 =====
+[No readable text found on this slide]
+===== Slide 75 =====
+EXERCISE ON ERM
+===== Slide 76 =====
+Exercise - self solve using all steps 1-  step 7  by own
+===== Slide 77 =====
+[No readable text found on this slide]
+===== Slide 78 =====
+[No readable text found on this slide]
+===== Slide 79 =====
+[No readable text found on this slide]
+===== Slide 80 =====
+[No readable text found on this slide]
+===== Slide 81 =====
+[No readable text found on this slide]
+===== Slide 82 =====
+[No readable text found on this slide]
+===== Slide 83 =====
+Another Example::
+A binary classifier is tested on a test set of n = 100 examples and It correctly predicts 62 labels, So
+Empirical Accuracy = 62%
+Empirical Error = 38%
+We want to know that is this accuracy statistically better than chance (i.e., better than 50%)?
+This is a one-tailed hypothesis test of proportions.
+===== Slide 84 =====
+[No readable text found on this slide]
+===== Slide 85 =====
+[No readable text found on this slide]
+===== Slide 86 =====
+[No readable text found on this slide]
+===== Slide 87 =====
+[No readable text found on this slide]
+===== Slide 88 =====
+[No readable text found on this slide]
+===== Slide 89 =====
+In this example:-
+The model trained via ERM gave 62% accuracy on test data
+A hypothesis test confirmed that this performance is statistically better than chance
+Therefore, we conclude that ERM has succeeded in finding a generalizable model in this case
+===== Slide 90 =====
+Empirical Risk Minimization (ERM) is a core optimization principle in machine learning.
+It says:
+Given a hypothesis space 𝓗 and a loss function L, select a function f that minimizes the average loss over the training dataset:
+===== Slide 91 =====
+Empirical Risk Minimization (ERM) is a core optimization principle in machine learning.
+It says:
+Given a hypothesis space 𝓗 and a loss function L, select a function f that minimizes the average loss over the training dataset:
+===== Slide 92 =====
+What is Parameter Estimation?
+In machine learning, we build models to predict or explain things. These models have certain parameters — like the slope and intercept in a straight-line equation — that need to be "learned" from data.
+Parameter estimation is the process of figuring out the best values for these parameters, using the data we have.
+machine learning and OTML, we usually work with samples, and our goal is to estimate unknown parameters (like μ )using estimators (like xˉ).
+===== Slide 93 =====
+[No readable text found on this slide]
+===== Slide 94 =====
+[No readable text found on this slide]
+===== Slide 95 =====
+Scenario as an example to understand parameter estimation :
+A factory has 1,000 sensors monitoring temperature on machines. You want to compute the average temperature across all sensors to detect overheating.
+Challenge:
+You cannot access data from all 1,000 sensors every minute due to data transfer and power limitations.
+A data science team is hired to predict the average support for a political party across an entire country of 10 million voters.
+Challenge:
+Surveying all 10 million people is impossible (costly and time-consuming).
+===== Slide 96 =====
+Point estimation is the process of using sample data to compute a single best-guess value (called an estimator) for an unknown population parameter such as:
+Mean
+Proportion
+Model coefficients (like weights in regression)
+In machine learning, point estimation is used to estimate model parameters that are later optimized during training.
+===== Slide 97 =====
+ERM is like deciding what dish you want to prepare (e.g., "minimize the amount of waste").
+Parameter Estimation is like choosing the right ingredients and amounts (e.g., salt = 1 tsp, rice = 200g) to make that dish.
+===== Slide 98 =====
+Example ::
+imagine you’re trying to guess someone’s monthly expenses based on their salary.
+You think there’s a linear relationship:
+expenses=θ0+ θ1⋅salary
+But you don't know the exact values of θ0+ θ1 (savings/spending rate).
+You collect data from a few people. Now you estimate the best values of θ0+ θ1  that match this data.
+That’s parameter estimation!
+===== Slide 99 =====
+Methods of Parameter Estimation:
+Point Estimation Methods
+1.1. Maximum Likelihood Estimation (MLE)
+1.2  Least Squares Estimation (LSE)
+1.3 Maximum A Posteriori Estimation (MAP)
+1.4 Gradient-Based Numerical Estimation
+2. Interval Estimation Methods
+2.1 Confidence Intervals (Frequentist)
+2.2Credible Intervals (Bayesian)
+===== Slide 100 =====
+1.1 Maximum Likelihood Estimation (MLE)
+Definition: Maximum Likelihood Estimation (MLE) is a method of estimating the parameters of a statistical model by choosing values that maximize the likelihood of the observed data.
+MLE answers the question:
+“Given the data I observed, which parameter value makes this data most likely to occur?”
+Usage in OTML:
+Transforms a probabilistic model into an optimization problem.
+Foundation for learning in logistic regression, naive Bayes, Gaussian models.
+Leads to loss functions (e.g., cross-entropy) used in deep learning.
+===== Slide 101 =====
+[No readable text found on this slide]
+===== Slide 102 =====
+[No readable text found on this slide]
+===== Slide 103 =====
+[No readable text found on this slide]
+===== Slide 104 =====
+[No readable text found on this slide]
+===== Slide 105 =====
+[No readable text found on this slide]
+===== Slide 106 =====
+[No readable text found on this slide]
+===== Slide 107 =====
+[No readable text found on this slide]
+===== Slide 108 =====
+[No readable text found on this slide]
+===== Slide 109 =====
+MLE as an Optimization Problem (in OTML)
+In OTML, MLE is interpreted as an optimization task:
+Objective:
+maximize log-likelihood or
+minimize negative log-likelihood.
+===== Slide 110 =====
+The resulting cost functions are used in training models like:
+Logistic Regression (cross-entropy loss)
+Naive Bayes
+Neural Networks (via softmax and likelihood-based loss)
+Thus, MLE provides the theoretical foundation for many machine learning loss function
+===== Slide 111 =====
+1.2 Least Squares Estimation (LSE)
+Definition:
+Minimizes the sum of squared differences between actual and predicted values.
+Formula:
+Usage in OTML:
+Equivalent to MLE when the error is Gaussian.
+Linear regression and curve fitting problems.
+Optimized using normal equations or gradient descent
+===== Slide 112 =====
+[No readable text found on this slide]
+===== Slide 113 =====
+[No readable text found on this slide]
+===== Slide 114 =====
+1.3 Maximum A Posteriori Estimation (MAP)
+Definition:
+Extends MLE by incorporating prior knowledge of the parameter.
+Usage in OTML:
+Used in Bayesian machine learning.
+Helps in regularization (e.g., L2 in Ridge regression comes from Gaussian prior).
+Penalizes complex models → reduces overfitting.
+===== Slide 115 =====
+4.Gradient-based numerical estimation involves computing the gradient (first derivative) of a cost function with respect to the parameters of the model and using this information to move towards the minimum (or maximum) of the function.
+Use in OTML:
+To optimize model parameters (e.g., weights in linear regression, neural networks).
+To minimize loss functions like MSE, Cross Entropy.
+To improve learning efficiency compared to brute-force or grid search methods.
+===== Slide 116 =====
+[No readable text found on this slide]
+===== Slide 117 =====
+[No readable text found on this slide]
+===== Slide 118 =====
+[No readable text found on this slide]
+===== Slide 119 =====
+[No readable text found on this slide]
+===== Slide 120 =====
+[No readable text found on this slide]
+===== Slide 121 =====
+[No readable text found on this slide]
+===== Slide 122 =====
+[No readable text found on this slide]
+===== Slide 123 =====
+Class Exercise: to be attempted by all
+You are given a simple linear model of the form:
+ŷ = θ × x
+Use gradient descent to estimate the value of θ for the following dataset:
+x = [1, 2, 3]
+y = [3, 6, 9]
+Answer the following:
+Write the expression for the cost function J(θ) using mean squared error.
+Derive the gradient of the cost function with respect to θ.
+Using the following parameters:
+Initial θ = 0
+Learning rate η = 0.1
+Number of iterations = 2
+Perform gradient descent to update θ.
+Show all calculations for Iteration 1:
+a. Compute the gradient at θ = 0
+b. Compute the updated θ after the first iteration
+===== Slide 124 =====
+Class Exercise Solution Hints : to be attempted by all
+Q1 Hint: Use the average of squared differences between actual and predicted values.
+Q2 Hint: Differentiate the cost function with respect to θ using the chain rule.
+Q3 Hint: Plug θ=0 into the gradient and update using the learning rate.
+Q4 Hint: Use the new θ to recalculate gradient and apply the same update rule again.
+===== Slide 125 =====
+Interval Estimation (Frequentist & Bayesian)
+What is it?
+Provides a range of values (interval) along with a confidence level (frequentist) or probability (Bayesian) that the true parameter lies within this range.
+Or
+Interval Estimation refers to the process of estimating an unknown population parameter using a range (interval) of values, along with an associated level of confidence or probability.
+===== Slide 126 =====
+[No readable text found on this slide]
+===== Slide 127 =====
+[No readable text found on this slide]
+===== Slide 128 =====
+Application in Optimization Techniques in Machine Learning
+===== Slide 129 =====
+A confidence interval
+provides a range of values which is likely to contain the true value of a population parameter
+(such as the mean μ) with a given level of confidence.
+===== Slide 130 =====
+For example, a 95% confidence interval means that if we took 100 different samples and calculated an interval for each, about 95 out of those 100 intervals would contain the true population mean.
+This is a frequentist concept, meaning the confidence level refers to the frequency of coverage across repeated samples.
+===== Slide 131 =====
+This formula assumes:
+The underlying distribution is normal or the sample size is large (by Central Limit Theorem).
+The population standard deviation σ is known
+===== Slide 132 =====
+A confidence interval does not say that the parameter has a certain probability of lying in the interval (that’s Bayesian), but rather, the procedure used to calculate it will produce correct intervals in a certain percentage of repeated samples.
+In machine learning, such intervals help you measure and communicate the uncertainty of your model’s estimates and predictions.
+===== Slide 133 =====
+[No readable text found on this slide]
+===== Slide 134 =====
+is a standard value taken from the standard normal (Z) distribution table when the confidence level is 95%.
+===== Slide 135 =====
+[No readable text found on this slide]
+===== Slide 136 =====
+[No readable text found on this slide]
+===== Slide 137 =====
+[No readable text found on this slide]
+===== Slide 138 =====
+IN CLASS EXERCISE TO BE ATTEMPTED BY ALL
+===== Slide 139 =====
+[No readable text found on this slide]
+===== Slide 140 =====
+[No readable text found on this slide]
+===== Slide 141 =====
+95% Confidence Interval = [4.325, 6.075]
+===== Slide 142 =====
+[No readable text found on this slide]
+===== Slide 143 =====
+[No readable text found on this slide]
+===== Slide 144 =====
+[No readable text found on this slide]
+===== Slide 145 =====
+[No readable text found on this slide]
+===== Slide 146 =====
+A credible interval is a Bayesian concept.
+It represents an interval within which the parameter θ lies with a given probability (e.g., 95%) based on the observed data.
+“There is a 95% probability that the true parameter θ lies within this interval — given the data DDD.”
+This is different from classical confidence intervals (frequentist), where the parameter is fixed and the interval is random.
+===== Slide 147 =====
+[No readable text found on this slide]
+===== Slide 148 =====
+[No readable text found on this slide]
+===== Slide 149 =====
+[No readable text found on this slide]
+===== Slide 150 =====
+PAUSE YOUR MIND AND THINK WHAT YOU HAVE LEARN SO FAR…..
+BEFORE MOVING NEXT SLIDE!!!
+===== Slide 151 =====
+ASSIGNMENT IN -CLASS
+1.  What is the role of a model in supervised learning?
+Define the hypothesis space in machine learning.
+What is meant by overfitting and underfitting in model learning?
+What is empirical risk? Write its mathematical expression.
+Why is empirical risk used instead of true risk in practice?
+What is the objective of empirical risk minimization (ERM)?
+State the normal equation used in linear regression for parameter estimation.
+What does the term 𝑋𝑇𝑋X T X represent in the normal equation?
+===== Slide 152 =====
+HINT FOR ABOVE QUESTIONS
+1.: Think of the model as a mathematical rule or function that takes features as input and gives predictions as output.
+.: It’s the set of all possible models or functions your algorithm can explore during training.
+.: One happens when your model is too complex and memorizes noise; the other happens when your model is too simple to capture the pattern in data.
+.: It refers to the average loss over training data — you’ll need to use a summation and divide by the number of samples.
+.: In real-world scenarios, we don’t have access to the full data distribution — only a finite sample.
+.: It aims to choose parameters that minimize the average prediction error over the training data.
+.: Involves transposing the feature matrix, multiplying it by itself, then inverting, and finally multiplying with the target vector.
+.: It forms a square matrix showing relationships (covariance) among features.
+.: Think of cases where some features are duplicate or linearly dependent. Regularization methods (like Ridge) help fix this.
+.: It computes the total squared difference between predicted and actual values — the goal is to minimize this to find best-fit parameters.
+===== Slide 153 =====
+What is Probabilistic Modelling?
+According to the textbook Mathematics for Machine Learning by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong,  probabilistic modelling is a formal approach to model
+data and uncertainty
+by using probability theory. This is crucial in machine learning because data is often noisy, incomplete, or variable.
+Uncertainty in Predictions  ??
+and
+Dependencies Between Variables ??
+And
+Joint Probability Distributions Define the Model
+===== Slide 154 =====
+Probabilistic Modelling
+Uncertainty in Predictions  ??
+and
+Dependencies Between Variables ??
+And
+Joint Probability Distributions Define the Model
+===== Slide 155 =====
+1. Uncertainty in Predictions
+In real-world applications, predictions are often uncertain.
+Probabilistic models help us express this uncertainty using probabilities.
+Instead of giving a single prediction, the model gives the likelihood of possible outcomes.
+===== Slide 156 =====
+[No readable text found on this slide]
+===== Slide 157 =====
+2. Dependencies Between Variables
+Features or input variables are often related to each other.
+Probabilistic models capture these relationships using joint probability distributions.
+This helps in better understanding and modeling the structure of the data.
+Example:      In medical data, the presence of one symptom may increase the chance of another. A joint model can capture this interdependence.
+===== Slide 158 =====
+[No readable text found on this slide]
+===== Slide 159 =====
+[No readable text found on this slide]
+===== Slide 160 =====
+What Is a Joint Probability Distribution?
+It tells you how two variables behave together — not separately.
+Mathematically:
+P(X,Y)
+This means:
+“The probability that input is X and output is Y at the same time.”
+===== Slide 161 =====
+[No readable text found on this slide]
+===== Slide 162 =====
+[No readable text found on this slide]
+===== Slide 163 =====
+[No readable text found on this slide]
+===== Slide 164 =====
+[No readable text found on this slide]
+===== Slide 165 =====
+[No readable text found on this slide]
+===== Slide 166 =====
+[No readable text found on this slide]
+===== Slide 167 =====
+Questions
+1. Joint Probability
+(a) What is the probability that it rained and the person carried an umbrella?
+(b) What is the probability that it did not rain and the person did not carry an umbrella?
+2. Marginal Probability
+(c) What is the probability that it rained on a given day?
+(d) What is the probability that a person carried an umbrella?
+3. Conditional Probability
+(e) What is the probability that a person carried an umbrella given that it rained?
+(f) What is the probability that it rained given that the person carried an umbrella?
+===== Slide 168 =====
+[No readable text found on this slide]
+===== Slide 169 =====
+What are Directed Graphical Models (DGMs)?
+“A Directed Graphical Model (also called a Bayesian Network) is a probabilistic model that uses a directed acyclic graph (DAG) to represent:
+Random variables as nodes
+Conditional dependencies as directed edges
+Each node represents a variable, and an arrow from node A to node B means that B is conditionally dependent on A.”
+===== Slide 170 =====
+Inference in Directed Graphical Models
+Inference means computing the probability of unknown variables given the known ones. & as per our textbook prescribed we can say:
+Inference is the process of computing a marginal or conditional probability of interest, typically of a hidden variable, given observed evidence.
+===== Slide 171 =====
+Why use DGMs in Machine Learning Optimization?
+a. Efficient Factorization:
+By capturing conditional independencies, DGMs help break down complex joint distributions into simpler local distributions, which reduces computational complexity.
+b. Optimization of Parameters:
+Learning the parameters of the local conditional distributions involves:
+Maximum Likelihood Estimation (MLE) or
+Maximum A Posteriori (MAP) estimation
+These are optimization problems, where we maximize the log-likelihood:
+===== Slide 172 =====
+Types of Inference Tasks in DGMs
+Directed Graphical Models (like Bayesian Networks) allow us to infer unknown values from known information using probability. There are three main types of inference tasks.
+===== Slide 173 =====
+[No readable text found on this slide]
+===== Slide 174 =====
+[No readable text found on this slide]
+===== Slide 175 =====
+Solve for Marginal Inference in DGM DIRECTED GRAPH MODEL
+===== Slide 176 =====
+[No readable text found on this slide]
+===== Slide 177 =====
+[No readable text found on this slide]
+===== Slide 178 =====
+[No readable text found on this slide]
+===== Slide 179 =====
+What is Gradient Descent?
+What is Gradient Descent?
+Gradient Descent is a first-order optimization algorithm used to minimize the loss function by iteratively updating the model parameters in the opposite direction of the gradient.
+===== Slide 180 =====
+What is Gradient Descent?
+What is Gradient Descent?
+Gradient Descent is a first-order optimization algorithm used to minimize the loss function by iteratively updating the model parameters in the opposite direction of the gradient.
+===== Slide 181 =====
+3. Why Gradient Descent in ML Optimization?
+Many ML models do not have closed-form solutions (e.g., deep neural networks).
+The loss surface is often nonlinear, so numerical optimization is needed.
+Gradient Descent is simple, efficient, and widely used.
+===== Slide 182 =====
+Type | Description | Use Case
+Batch Gradient Descent | Uses all data at each step | Small datasets
+Stochastic Gradient Descent (SGD) | Updates for each training example | Large-scale learning
+Mini-batch Gradient Descent | Uses a small batch at each step | Combines speed and stability
+===== Slide 183 =====
+1.What is Constrained Optimization?
+In machine learning and optimization, constrained optimization refers to minimizing (or maximizing) an objective function
+subject to certain restrictions (constraints).
+General form:
+Minimize:𝑓(𝑥)
+Subject to:
+𝑔𝑖(𝑥)=0(equality constraints)
+and/or
+ℎ𝑗(𝑥)≤0(inequality constraints)
+===== Slide 184 =====
+2. Why Constraints in Machine Learning?
+Constraints arise in ML when:
+Model parameters must satisfy certain conditions (e.g., probabilities must sum to 1)
+Regularization introduces constraint-like behavior
+Optimization is subject to resource limits (e.g., budget, time, fairness)
+when constraints are present, plain gradient descent fails to give a valid solution. That’s why we need Lagrange multipliers or similar constrained optimization techniques.
+===== Slide 185 =====
+[No readable text found on this slide]
+===== Slide 186 =====
+[No readable text found on this slide]
+===== Slide 187 =====
+[No readable text found on this slide]
+===== Slide 188 =====
+[No readable text found on this slide]
+===== Slide 189 =====
+[No readable text found on this slide]
+===== Slide 190 =====
+1. What is Convex Optimization?
+Convex Optimization is a subfield of optimization where:
+The objective function is convex
+The feasible region (set of solutions allowed by constraints) is also convex
+This structure ensures that any local minimum is also a global minimum, which is very desirable in machine learning.
+===== Slide 191 =====
+[No readable text found on this slide]
+===== Slide 192 =====
+3. Why Convex Optimization is Important in ML
+Many machine learning models involve minimizing a loss function, and if that function is convex, we benefit from:
+Guaranteed global optimum
+Efficient algorithms like gradient descent
+Well-understood convergence behavior
+===== Slide 193 =====
+[No readable text found on this slide]
+===== Slide 194 =====
+[No readable text found on this slide]
+===== Slide 195 =====
+[No readable text found on this slide]
+===== Slide 196 =====
+[No readable text found on this slide]
+===== Slide 197 =====
+THANKS

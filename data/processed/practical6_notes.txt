@@ -1,0 +1,101 @@
+============================================================
+Practical 6: Lagrange Multipliers
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-6-Constrained-Optimization-Lagrange-Multipliers
+
+Related PPT Section:
+Constrained Optimization and Lagrange Multipliers
+
+Keywords:
+constraint; Lagrange multiplier; Lagrangian; equality constraint; objective function; optimal solution
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 6: Constrained Optimization and Lagrange Multipliers
+
+## 1. Aim
+
+The aim of this practical is to understand constrained optimization and the use of Lagrange multipliers for solving optimization problems with equality constraints.
+
+In this practical, students solve a simple constrained optimization problem by constructing the Lagrangian function, computing partial derivatives, solving simultaneous equations, and verifying the optimal solution.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Constrained Optimization and Lagrange Multipliers
+
+This practical is mapped with Module 1 of OTML, where students study optimization foundations, model fitting, constraints, objective functions, and mathematical techniques used in machine learning optimization.
+
+---
+
+## 3. Theory Background
+
+In many optimization problems, we cannot choose any value freely. Some restrictions must be satisfied. These restrictions are called **constraints**.
+
+A constrained optimization problem contains two main parts:
+
+| Component | Meaning |
+|---|---|
+| Objective function | Function to be minimized or maximized |
+| Constraint | Condition that must be satisfied |
+
+A general equality-constrained optimization problem can be written as:
+
+```text
+Minimize or Maximize: f(x, y)
+
+Subject to: g(x, y) = 0
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Markdown Cell 1 ---
+# Practical 6: Constrained Optimization and Lagrange Multipliers
+    Understanding Constrained Optimization using Lagrange Multipliers
+
+--- Code Cell 8 ---
+import sympy as sp
+
+--- Code Cell 9 ---
+x, y, lam = sp.symbols('x y lam')
+
+#x,y  = optimization variables ,lam  =  Lagrange multiplier
+
+--- Code Cell 10 ---
+f = x**2 + y**2
+
+constraint = x + y - 10  #define objective
+
+--- Code Cell 11 ---
+L = f + lam * constraint
+
+print("Lagrangian Function:")
+print(L)
+
+--- Code Cell 12 ---
+#calculate partial derivative
+dL_dx = sp.diff(L, x)
+
+dL_dy = sp.diff(L, y)
+
+dL_dlam = sp.diff(L, lam)
+
+print(dL_dx)
+print(dL_dy)
+print(dL_dlam)
+
+--- Code Cell 13 ---
+solution = sp.solve(
+    [dL_dx, dL_dy, dL_dlam],
+    (x, y, lam)
+)
+
+print(solution)

@@ -1,0 +1,248 @@
+============================================================
+Practical 1: Data, Models, and Learning
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-1-Data-Models-and-Learning
+
+Related PPT Section:
+Data, Models, and Learning
+
+Keywords:
+data; model; features; labels; supervised learning; prediction; experience; task; performance
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 1: Data, Models, and Learning
+
+## 1. Aim
+
+The aim of this practical is to understand the basic building blocks of machine learning: data, features, labels, models, and learning.
+In this practical, students use a simple Music Genre Recommendation System to observe how a machine learning model learns patterns from training data and predicts a suitable music genre based on user information such as age and gender.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Data, Models, and Learning using a Music Genre Recommendation System
+
+This practical is mapped with the introductory part of Module 1, where students learn how machine learning models are built using data, how input-output relationships are represented, and how learning is connected with model fitting.
+
+---
+
+## 3. Theory Background
+
+In machine learning, **data** is the foundation of learning. A dataset contains examples or observations from which the model learns useful patterns.
+
+A machine learning dataset usually contains:
+
+- **Features:** Input variables used by the model for learning.
+- **Labels:** Output values or target classes that the model tries to predict.
+- **Model:** A mathematical function or hypothesis that maps input features to output predictions.
+- **Learning:** The process of adjusting the model so that it can make correct predictions on new data.
+
+In this practical, the dataset contains user information such as age and gender. These are used as input features. The target output is the recommended music genre. Therefore, this is a simple example of **supervised learning**, because both input features and output labels are available.
+
+A supervised learning model learns from known examples and then predicts the output for new unseen examples.
+
+For example:
+
+```text
+Age + Gender  --->  Machine Learning Model  --->  Recommended Music Genre
+```
+
+This practical helps students understand that a machine learning model does not memorize theory directly. Instead, it learns patterns from data.
+
+---
+
+## 4. Link with Optimization in Machine Learning
+
+Optimization is the mathematical foundation of machine learning. In machine learning, learning usually means finding the best model parameters that reduce prediction error.
+
+Although this practical uses a simple Decision Tree Classifier, the conceptual connection with optimization is still important:
+
+- The model studies the training data.
+- It tries to separate different music genre classes based on feature values.
+- It learns decision rules from examples.
+- The final objective is to make correct predictions for new input data.
+
+In general, machine learning models use optimization to minimize error or loss. For example:
+
+- Linear Regression minimizes Mean Squared Error.
+- Logistic Regression minimizes classification loss.
+- Neural Networks minimize complex loss functions using gradient-based optimization.
+- Decision Trees select feature splits that improve class separation.
+
+Thus, this practical introduces the first step toward understanding model fitting and optimization-based learning.
+
+---
+
+## 5. Dataset / Input Used
+
+**Dataset Name:** `music1.csv`
+
+The dataset contains simple user records for music genre recommendation.
+
+### Dataset Columns
+
+| Column Name | Meaning |
+|---|---|
+| `age` | Age of the user |
+| `gender` | Gender encoded as a numerical value |
+| `gener` | Music genre label to be predicted |
+
+### Input Features
+
+```text
+age, gender
+```
+
+### Output Label
+
+```text
+gener
+```
+
+The model uses `age` and `gender` as input features and predicts the music genre stored in the `gener` column.
+
+---
+
+## 6. Python Implementation Summary
+
+The notebook performs the following steps:
+
+1. Imports required Python libraries:
+   - `pandas`
+   - `DecisionTreeClassifier` from `sklearn.tree`
+
+2. Loads the dataset using:
+
+```python
+df = pd.read_csv("music1.csv")
+```
+
+3. Displays the first few records of the dataset using:
+
+```python
+df.head()
+```
+
+4. Separates the dataset into input features and output labels:
+
+```python
+X = df[["age", "gender"]]
+y = df["gener"]
+```
+
+5. Creates a Decision Tree Classifier model.
+
+6. Trains the model using the available dataset.
+
+7. Makes a sample prediction for a new user.
+
+8. Interprets the prediction result as a recommended music genre.
+
+This practical gives students a simple and clear understanding of how raw data is converted into a model-based prediction system.
+
+---
+
+## 7. Steps to Run
+
+1. Open the notebook file:
+
+```text
+OTML_Practical_1.ipynb.ipynb
+```
+
+2. Make sure the dataset file is available in the same folder:
+
+```text
+music1.csv
+```
+
+3. Install required libraries if they are not already installed:
+
+```bash
+pip install pandas scikit-learn
+```
+
+4. Run all notebook cells sequentially.
+
+5. Observe the dataset display, input-output separation, model training, and prediction output.
+
+6. Modify the sample input values for age and gender to test different predictions.
+
+---
+
+## 8. Expected Output
+
+After running this practical, students should observe:
+
+- Display of the dataset using `df.head()`.
+- Identification of input features:
+  - `age`
+  - `gender`
+- Identification of output label:
+  - `gener`
+- Successful training of a Decision Tree Classifier.
+- Prediction of a music genre for a new user input.
+- Understanding of how a simple machine learning model learns from data.
+
+Example expected prediction format:
+
+```text
+Predicted Music Genre: HipHop / Jazz / Classical / Dance / Acoustic
+```
+
+The actual predicted genre may vary depending on the input values provided by the student.
+
+---
+
+## 9. Learning Outcomes
+
+After completing this practical, students will be able to:
+
+- Understand the meaning of data in machine learning.
+- Identify features and labels in a dataset.
+- Explain the role of a model in supervised learning.
+- Understand how learning happens from training data.
+- Implement a simple supervised learning model using Python.
+- Use a Decision Tree Classifier for basic prediction.
+- Relate the practical implementation with the OTML concept of model fitting.
+- Understand that optimization helps machine learning models improve prediction performance.
+
+---
+
+## 10. Keywords for RAG
+
+OTML; Data Models and Learning; Supervised Learning; Features; Labels; Model Fitting; Music Recommendation System; Decision Tree Classifier; Machine Learning Dataset; Optimization in Machine Learning
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Code Cell 5 ---
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+df = pd.read_csv("music1.csv")
+
+df.head()
+
+--- Code Cell 6 ---
+X = df[["age", "gender"]]
+y = df["gener"]
+
+--- Code Cell 7 ---
+model = DecisionTreeClassifier()
+model.fit(X, y)
+
+--- Code Cell 8 ---
+sample = [[21, 1]]
+prediction = model.predict(sample)
+
+print("Recommended Music Genre:", prediction[0])

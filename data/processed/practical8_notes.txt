@@ -1,0 +1,137 @@
+============================================================
+Practical 8: Probabilistic Modelling and Inference
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-8-Probabilistic-Modelling-and-Inference
+
+Related PPT Section:
+Probabilistic Modelling and Inference
+
+Keywords:
+probabilistic modelling; inference; uncertainty; joint probability; conditional probability; prediction probability
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 8: Probabilistic Modelling and Inference
+
+## 1. Aim
+
+The aim of this practical is to understand probabilistic modelling and inference using a Gaussian Naive Bayes classifier.
+
+In this practical, students use a simple Music Genre Recommendation System to learn how probability-based machine learning models make predictions under uncertainty and how class probabilities are used for inference.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Probabilistic Modelling and Inference using Gaussian Naive Bayes
+
+This practical is mapped with Module 1 of OTML, where students study model fitting, error measurement, probabilistic modelling, inference, and the role of optimization in machine learning.
+
+---
+
+## 3. Theory Background
+
+Probabilistic modelling is a machine learning approach in which predictions are made using probability values.
+
+In deterministic models, the model may directly predict one output class. In probabilistic models, the model estimates the probability of different possible classes and then selects the most likely class.
+
+For example, a probabilistic model may estimate:
+
+```text
+P(HipHop | age, gender)
+P(Jazz | age, gender)
+P(Classical | age, gender)
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Code Cell 1 ---
+import pandas as pd
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.naive_bayes import GaussianNB
+
+from sklearn.metrics import accuracy_score
+
+data = pd.read_csv("music1.csv")
+
+
+data = pd.read_csv("music1.csv")
+
+print(data.head())
+print(data.columns)
+
+--- Code Cell 2 ---
+# Remove unwanted empty column
+data = data.drop(columns=["Unnamed: 3"], errors="ignore")
+
+# Rename spelling mistake: gener → genre
+data = data.rename(columns={"gener": "genre"})
+
+print(data.head())
+print(data.isnull().sum())
+
+--- Code Cell 3 ---
+# Now clean missing values only from useful columns
+data = data.dropna()
+
+print("After cleaning:")
+print(data.isnull().sum())
+print("Dataset shape:", data.shape)
+
+--- Code Cell 4 ---
+X = data[["age", "gender"]]
+y = data["genre"]
+
+print(X.head())
+print(y.head())
+
+--- Code Cell 5 ---
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+print("Training Data Shape:", X_train.shape)
+print("Testing Data Shape:", X_test.shape)
+
+--- Code Cell 6 ---
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+print("Model Trained Successfully")
+
+--- Code Cell 7 ---
+y_pred = model.predict(X_test)
+
+print("Predicted Values:")
+print(y_pred)
+
+--- Code Cell 8 ---
+probabilities = model.predict_proba(X_test)
+
+print("Prediction Probabilities:")
+print(probabilities)
+
+--- Code Cell 9 ---
+accuracy = accuracy_score(y_test, y_pred)
+
+print("Accuracy:", accuracy)
+
+--- Code Cell 10 ---
+age = int(input("Enter Age: "))
+gender = int(input("Enter Gender (0 = Female, 1 = Male): "))
+
+prediction = model.predict([[age, gender]])
+
+print("Recommended Genre:", prediction[0])

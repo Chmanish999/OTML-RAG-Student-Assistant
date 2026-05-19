@@ -1,0 +1,318 @@
+============================================================
+Practical 4: Parameter Estimation
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-4-Parameter-Estimation
+
+Related PPT Section:
+Parameter Estimation
+
+Keywords:
+parameter estimation; estimator; MLE; LSE; MAP; likelihood; model parameters
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 4: Parameter Estimation
+
+## 1. Aim
+
+The aim of this practical is to understand the concept of parameter estimation in machine learning and observe how a machine learning model estimates internal rules from training data.
+
+In this practical, students use a simple Music Genre Recommendation System to understand how model parameters or decision rules are learned from data and how parameter estimation is connected with prediction and optimization.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Parameter Estimation using a Music Genre Recommendation System
+
+This practical is mapped with Module 1 of OTML, where students study model fitting, parameter estimation, learning from data, prediction, error measurement, and optimization-based model training.
+
+---
+
+## 3. Theory Background
+
+In machine learning, a model learns from data by estimating some internal values or rules. These internal values are called **parameters**.
+
+Parameters help a model convert input data into output predictions.
+
+Examples of parameters in different machine learning models are:
+
+| Model | Parameters |
+|---|---|
+| Linear Regression | Weights and bias |
+| Decision Tree | Split rules |
+| Neural Network | Weights and biases |
+| Support Vector Machine | Hyperplane coefficients |
+
+**Parameter estimation** means finding the best parameter values using training data.
+
+In simple terms:
+
+```text
+Parameter Estimation = Finding the best internal model values from data
+```
+
+The goal of parameter estimation is:
+
+```text
+Best prediction with minimum error
+```
+
+In this practical, a Decision Tree Classifier is used. In a decision tree, the learned parameters are not simple numerical weights like linear regression. Instead, the model estimates decision rules such as:
+
+```text
+If age is in a certain range and gender has a certain value, then predict a particular music genre.
+```
+
+Thus, the model estimates rules from data and uses those rules for prediction.
+
+---
+
+## 4. Link with Optimization in Machine Learning
+
+Parameter estimation is directly connected with optimization.
+
+In machine learning, the model tries to find the best parameters that reduce prediction error. This process can be understood as an optimization problem.
+
+The general idea is:
+
+```text
+Find parameters that minimize error or loss
+```
+
+For example:
+
+- Linear Regression estimates weights by minimizing Mean Squared Error.
+- Logistic Regression estimates parameters by minimizing classification loss.
+- Neural Networks estimate weights using gradient descent.
+- Decision Trees estimate split rules by improving class separation.
+
+In this practical, the Decision Tree model learns decision rules from the dataset. These rules are selected in such a way that the model can classify the training examples as accurately as possible.
+
+Therefore, parameter estimation is one of the core steps in model fitting and optimization-based learning.
+
+---
+
+## 5. Dataset / Input Used
+
+**Dataset Name:** `music1.csv`
+
+The dataset contains user information for music genre recommendation.
+
+### Dataset Columns
+
+| Column Name | Meaning |
+|---|---|
+| `age` | Age of the user |
+| `gender` | Gender encoded as a numerical value |
+| `gener` | Music genre label to be predicted |
+
+### Input Features
+
+```text
+age, gender
+```
+
+### Output Label
+
+```text
+gener
+```
+
+The model uses `age` and `gender` as input features and predicts the music genre stored in the `gener` column.
+
+---
+
+## 6. Python Implementation Summary
+
+The notebook performs the following steps:
+
+1. Introduces the concept of parameters in machine learning.
+
+2. Explains parameter estimation using simple model examples.
+
+3. Imports required Python libraries:
+   - `pandas`
+   - `numpy`
+   - `scikit-learn`
+   - `matplotlib`
+
+4. Loads the dataset:
+
+```python
+df = pd.read_csv("music1.csv")
+```
+
+5. Separates input features and output label:
+
+```python
+X = df[["age", "gender"]]
+y = df["gener"]
+```
+
+6. Creates a machine learning classification model.
+
+7. Trains the model using available data.
+
+8. Observes how the model learns internal decision rules.
+
+9. Makes predictions using the trained model.
+
+10. Connects the learned model behavior with parameter estimation and optimization.
+
+---
+
+## 7. Steps to Run
+
+1. Open the notebook file:
+
+```text
+OTML_Practical_4_Parameter_Estimation.ipynb
+```
+
+2. Make sure the dataset file is available in the same folder:
+
+```text
+music1.csv
+```
+
+3. Install required libraries if needed:
+
+```bash
+pip install pandas numpy scikit-learn matplotlib jupyter
+```
+
+4. Run all notebook cells sequentially.
+
+5. Observe the theory explanation, model training, and prediction output.
+
+6. Relate the learned model rules with the idea of parameter estimation.
+
+---
+
+## 8. Expected Output
+
+After running this practical, students should observe:
+
+- Explanation of parameters in machine learning.
+- Loading of `music1.csv`.
+- Identification of input features and output label.
+- Training of a machine learning model.
+- Prediction of music genre using learned rules.
+- Understanding of how internal model rules are estimated from data.
+- Connection between parameter estimation and optimization.
+
+Example expected output format:
+
+```text
+Input: age, gender
+Predicted Music Genre: HipHop / Jazz / Classical / Dance / Acoustic
+```
+
+The actual predicted genre may vary depending on the input values and model settings.
+
+---
+
+## 9. Learning Outcomes
+
+After completing this practical, students will be able to:
+
+- Understand the meaning of parameters in machine learning.
+- Explain the concept of parameter estimation.
+- Identify parameters or learned rules in different ML models.
+- Train a supervised learning model using Python.
+- Understand how a model learns internal rules from data.
+- Relate parameter estimation with model fitting.
+- Connect parameter estimation with optimization in machine learning.
+- Interpret prediction output in terms of learned model behavior.
+
+---
+
+## 10. Keywords for RAG
+
+OTML; Parameter Estimation; Model Parameters; Model Fitting; Decision Tree Classifier; Supervised Learning; Prediction; Music Recommendation System; Optimization in Machine Learning; Machine Learning Parameters
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Markdown Cell 1 ---
+# Practical 4: Parameter Estimation
+
+## Understanding Parameter Estimation using Machine Learning Models
+
+This notebook explains how machine learning models estimate internal rules or parameters from training data.
+
+--- Markdown Cell 2 ---
+## Objective
+
+After completing this practical, students will be able to:
+
+- Understand the meaning of parameters in machine learning.
+- Understand the concept of parameter estimation.
+- Learn how machine learning models estimate internal rules from data.
+- Connect parameter estimation with optimization.
+- Understand how learned parameters help in prediction.
+
+--- Markdown Cell 3 ---
+## What are Parameters?
+
+Parameters are internal values or rules learned by a machine learning model from data. These values help the model make predictions.
+
+Parameter estimation means finding the best parameter values or decision rules using training data. The goal is to achieve better prediction with minimum error.
+
+| Model | Parameters |
+|---|---|
+| Linear Regression | Weights and bias |
+| Decision Tree | Split rules |
+| Neural Network | Weights and biases |
+| SVM | Hyperplane coefficients |
+
+--- Code Cell 4 ---
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+
+--- Code Cell 5 ---
+df = pd.read_csv("music1.csv")
+df.head()
+
+--- Code Cell 6 ---
+X = df[["age", "gender"]]
+y = df["gener"]
+
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X, y)
+model
+
+--- Code Cell 7 ---
+plt.figure(figsize=(12, 8))
+plot_tree(
+    model,
+    feature_names=["age", "gender"],
+    class_names=model.classes_,
+    filled=True
+)
+plt.show()
+
+--- Code Cell 8 ---
+sample = pd.DataFrame([[22, 1]], columns=["age", "gender"])
+prediction = model.predict(sample)
+print("Predicted Genre:", prediction[0])
+
+--- Markdown Cell 9 ---
+## Observation
+
+During training, the machine learning model estimates internal decision rules from the data. These estimated rules act as parameters and help the model make predictions on new inputs.
+
+The workflow is:
+
+```text
+Data → Learning → Parameter Estimation → Prediction
+```

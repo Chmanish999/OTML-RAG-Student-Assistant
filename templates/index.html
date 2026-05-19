@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OTML Student Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>OTML Student Learning Assistant</h1>
+            <p>
+                Ask questions from OTML Module 1 Practical 1–9.
+                Answers are generated using local RAG retrieval and Gemini.
+            </p>
+        </header>
+
+        <section class="card">
+            <form method="POST">
+                <label for="question">Enter your OTML question:</label>
+
+                <textarea
+                    id="question"
+                    name="question"
+                    rows="4"
+                    placeholder="Example: What is gradient descent?"
+                >{{ question }}</textarea>
+
+                <button type="submit">Ask Assistant</button>
+            </form>
+        </section>
+
+        {% if answer %}
+        <section class="card answer-card">
+            <h2>Answer</h2>
+
+            <p class="mode">Mode: {{ mode }}</p>
+
+            <div class="answer-text">
+                {{ answer }}
+            </div>
+
+            <h3>Sources Used</h3>
+
+            {% if sources %}
+                <ul class="source-list">
+                    {% for source in sources %}
+                    <li>
+                        <strong>{{ source.practical_no }} - {{ source.topic_name }}</strong><br>
+                        Source Type: {{ source.source_type }}<br>
+                        Source File: {{ source.source_file }}<br>
+
+                        {% if source.repository_url != "Not applicable" %}
+                        Repository:
+                        <a href="{{ source.repository_url }}" target="_blank">
+                            {{ source.repository_url }}
+                        </a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No valid OTML source found.</p>
+            {% endif %}
+        </section>
+        {% endif %}
+
+        <section class="card">
+            <h2>Available OTML Module 1 Practical Topics</h2>
+
+            <ol>
+                <li>Data, Models, and Learning</li>
+                <li>Model Fitting and Error Measurement</li>
+                <li>Empirical Risk Minimization</li>
+                <li>Parameter Estimation</li>
+                <li>Gradient Descent</li>
+                <li>Lagrange Multipliers</li>
+                <li>Convex Optimization</li>
+                <li>Probabilistic Modelling and Inference</li>
+                <li>Directed Graphical Models</li>
+            </ol>
+        </section>
+    </div>
+</body>
+</html>

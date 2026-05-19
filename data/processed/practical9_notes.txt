@@ -1,0 +1,110 @@
+============================================================
+Practical 9: Directed Graphical Models
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-9-Directed-Graphical-Models
+
+Related PPT Section:
+Directed Graphical Models
+
+Keywords:
+DGM; DAG; Bayesian network; nodes; edges; parent-child dependency; marginal inference
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 9: Directed Graphical Models
+
+## 1. Aim
+
+The aim of this practical is to understand Directed Graphical Models and represent dependencies among machine learning variables using a directed graph.
+
+In this practical, students create a simple directed graphical model for a Music Genre Recommendation example, where variables such as Age and Gender influence the predicted Music Genre.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Directed Graphical Models
+
+This practical is mapped with Module 1 of OTML, where students study model representation, probabilistic modelling, inference, and dependency structures used in machine learning.
+
+---
+
+## 3. Theory Background
+
+A Directed Graphical Model is a graph-based representation of relationships among variables.
+
+It contains:
+
+| Component | Meaning |
+|---|---|
+| Node | Represents a variable |
+| Directed edge | Represents direction of dependency |
+| Parent variable | Variable that influences another variable |
+| Child variable | Variable influenced by a parent variable |
+
+A directed edge is written as:
+
+```text
+A → B
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Markdown Cell 1 ---
+# OTML Practical 9: Directed Graphical Models
+
+Directed Graphical Models represent relationships among variables using a directed graph.
+
+--- Code Cell 3 ---
+import networkx as nx
+import matplotlib.pyplot as plt
+
+--- Code Cell 4 ---
+G = nx.DiGraph()
+
+G.add_node("Age")
+G.add_node("Gender")
+G.add_node("Music Genre")
+
+G.add_edge("Age", "Music Genre")
+G.add_edge("Gender", "Music Genre")
+
+--- Code Cell 5 ---
+plt.figure(figsize=(7, 5))
+
+pos = nx.spring_layout(G, seed=42)
+
+nx.draw(
+    G,
+    pos,
+    with_labels=True,
+    node_size=3000,
+    font_size=12,
+    arrows=True
+)
+
+plt.title("Directed Graphical Model for Music Recommendation")
+plt.show()
+
+--- Code Cell 6 ---
+print("Dependencies in the Directed Graphical Model:")
+
+for edge in G.edges():
+    print(edge[0], "influences", edge[1])
+
+--- Code Cell 7 ---
+print("""
+Interpretation:
+
+1. Age is a parent node of Music Genre.
+2. Gender is a parent node of Music Genre.
+3. Music Genre depends on Age and Gender.
+4. This structure represents a simple Directed Graphical Model.
+""")

@@ -1,0 +1,99 @@
+============================================================
+Practical 2: Model Fitting and Error Measurement
+============================================================
+
+Repository URL:
+https://github.com/Chmanish999/OTML-Practical-2-Model-Fitting-and-Error-Measurement
+
+Related PPT Section:
+Model Fitting and Error Measurement
+
+Keywords:
+model fitting; error measurement; loss; accuracy; MSE; prediction error; evaluation
+
+============================================================
+README CONTENT
+============================================================
+
+# OTML Practical 2: Model Fitting and Error Measurement
+
+## 1. Aim
+
+The aim of this practical is to understand how a machine learning model is fitted on training data and how its performance is measured using error or accuracy-based evaluation.
+
+In this practical, students use a simple Music Genre Recommendation System to train a supervised learning model and evaluate how well the model predicts the correct music genre based on user information such as age and gender.
+
+---
+
+## 2. Course and Module Mapping
+
+**Course:** A8751 – Optimization Techniques in Machine Learning
+**Module:** Module 1 – Model Fitting and Error Measurement
+**Practical Topic:** Model Fitting and Error Measurement using a Music Genre Recommendation System
+
+This practical is mapped with Module 1 of OTML, where students learn the basic idea of model fitting, prediction, error measurement, and evaluation of machine learning models.
+
+---
+
+## 3. Theory Background
+
+In machine learning, **model fitting** means training a model using available data so that it can learn the relationship between input features and output labels.
+
+A dataset usually contains:
+
+- **Input features:** Variables used by the model for prediction.
+- **Output label:** The target value or class to be predicted.
+- **Training data:** Data used to teach the model.
+- **Testing data:** Data used to evaluate the trained model.
+
+In this practical, the input features are:
+
+```text
+age, gender
+
+============================================================
+NOTEBOOK CONTENT
+============================================================
+
+--- Markdown Cell 1 ---
+# Practical 2: Model Fitting and Error Measurement
+1. Title
+
+Model Fitting and Error Measurement using Music Recommendation System
+
+--- Code Cell 3 ---
+import pandas as pd
+
+from sklearn.tree import DecisionTreeClassifier
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import accuracy_score
+
+--- Code Cell 4 ---
+df = pd.read_csv("music1.csv")
+
+df.head()
+
+--- Code Cell 5 ---
+X = df[["age", "gender"]] #input feature
+
+y = df["gener"] #target or output
+
+--- Code Cell 6 ---
+X_train, X_test, y_train, y_test = train_test_split( X, y,test_size=0.2,random_state=42 )
+
+--- Code Cell 7 ---
+model = DecisionTreeClassifier()
+
+model.fit(X_train, y_train)
+
+--- Code Cell 8 ---
+y_pred = model.predict(X_test)
+
+print(y_pred)
+
+--- Code Cell 9 ---
+accuracy = accuracy_score(y_test, y_pred)
+
+print("Accuracy:", accuracy)  #100% meaning accurate prediction=1.0  75% =0.75
