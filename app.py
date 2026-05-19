@@ -7,7 +7,7 @@ from flask import Flask, render_template, request
 BASE_DIR = Path(__file__).resolve().parent
 RAG_DIR = BASE_DIR / "rag"
 
-# Allow app.py to import files from rag folder
+# Allow app.py to import scripts from the rag folder
 sys.path.insert(0, str(RAG_DIR))
 
 from retrieve import retrieve
