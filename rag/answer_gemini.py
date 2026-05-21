@@ -15,8 +15,11 @@ load_dotenv(BASE_DIR / ".env")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 
-def build_context(retrieved_results, max_chars_per_chunk=2500):
-    """Prepare retrieved OTML chunks as context for Gemini."""
+def build_context(retrieved_results, max_chars_per_chunk=8000):
+    """
+    Prepare retrieved OTML chunks as context for Gemini.
+    Larger context is used so Gemini can generate exam-oriented answers.
+    """
     context_blocks = []
 
     for index, (score, chunk) in enumerate(retrieved_results, start=1):
@@ -42,15 +45,22 @@ def build_context(retrieved_results, max_chars_per_chunk=2500):
 
 
 def build_prompt(question, context):
-    """Create strict RAG prompt for Gemini."""
+    """
+    Create strict exam-oriented RAG prompt for Gemini.
+    """
     return f"""
 You are an OTML Student Assistant for undergraduate students.
 
 You must answer ONLY using the provided OTML context.
 Do not use outside knowledge.
 Do not invent information.
-Use simple, clear, classroom-friendly language.
-Keep the answer concise but meaningful.
+Use clear, formal, academic, classroom-friendly language.
+Do not use Markdown formatting symbols such as **, ##, `, or triple backticks.
+
+The answer must be suitable for handwritten university examination preparation.
+Do not give a very short answer.
+Do not answer only in 2 or 3 lines.
+The answer must be descriptive enough for a 5-mark to 10-mark question.
 
 If the answer is not available in the provided OTML context, reply exactly:
 "This topic is not covered in the provided OTML Module 1 and practical material."
@@ -64,15 +74,56 @@ Provided OTML Context:
 Required Answer Format:
 
 Answer:
-<give the answer in 1 or 2 short paragraphs>
+
+1. Definition
+Write a clear and direct definition of the concept.
+
+2. Explanation
+Explain the concept in simple academic language suitable for undergraduate students.
+
+3. Role in Optimization Techniques in Machine Learning
+Explain why this concept is important in OTML or machine learning optimization.
+
+4. Working / Key Idea
+Explain how the concept works, or describe its main idea step by step.
+
+5. Important Points
+Give 4 to 6 important points in bullet form.
+
+6. Example
+Give a small example from the provided context if available.
+
+7. Conclusion
+End with a short conclusion that can be written in an exam.
+
+Length Requirement:
+Write at least 300 words if enough context is available.
+For broad theory questions, write 350 to 500 words.
+Avoid overly short answers.
 
 Sources Used:
-- <mention Practical number/topic or Module PPT source used>
+Mention the Practical number/topic and/or Module PPT source used.
 """
 
+def clean_gemini_output(text):
+    """
+    Remove Markdown formatting symbols from Gemini output
+    so answers appear clean for classroom/exam use.
+    """
+    if not text:
+        return ""
 
+    text = text.replace("**", "")
+    text = text.replace("```text", "")
+    text = text.replace("```python", "")
+    text = text.replace("```", "")
+    text = text.replace("`", "")
+
+    return text.strip()
 def generate_gemini_answer(question, retrieved_results):
-    """Generate answer from Gemini using retrieved OTML context."""
+    """
+    Generate answer from Gemini using retrieved OTML context.
+    """
     if not retrieved_results:
         return (
             "Answer:\n"
@@ -85,7 +136,8 @@ def generate_gemini_answer(question, retrieved_results):
 
     if not api_key:
         raise ValueError(
-            "GEMINI_API_KEY not found. Please add it to your .env file."
+            "GEMINI_API_KEY not found. Please add it to your .env file locally "
+            "or configure it as a Secret Manager environment variable on Cloud Run."
         )
 
     context = build_context(retrieved_results)
@@ -102,7 +154,9 @@ def generate_gemini_answer(question, retrieved_results):
 
 
 def print_unique_retrieved_sources(retrieved_results):
-    """Print unique retrieved local sources only once."""
+    """
+    Print unique retrieved local sources only once.
+    """
     print("\nRetrieved Sources Checked Locally:")
 
     if not retrieved_results:
@@ -139,7 +193,7 @@ def main():
     else:
         question = input("Enter your OTML question: ")
 
-    retrieved_results = retrieve(question, top_k=3)
+    retrieved_results = retrieve(question, top_k=7)
 
     print("\n============================================================")
     print("OTML STUDENT ASSISTANT - GEMINI RAG ANSWER")
@@ -154,9 +208,10 @@ def main():
         answer = generate_gemini_answer(question, retrieved_results)
         print(answer)
 
-    except Exception:
-        print("Gemini is currently unavailable or overloaded.")
-        print("Falling back to local template-based answer.\n")
+    except Exception as error:
+        print("Gemini failed. Error details:")
+        print(error)
+        print("\nFalling back to local template-based answer.\n")
 
         local_result = make_short_answer(question, retrieved_results)
         print_final_answer(question, local_result)

@@ -19,7 +19,9 @@ app = Flask(__name__)
 
 
 def get_unique_sources(retrieved_results):
-    """Return unique retrieved sources for display."""
+    """
+    Return unique retrieved sources for display on the web page.
+    """
     unique_sources = []
     seen = set()
 
@@ -48,8 +50,11 @@ def get_unique_sources(retrieved_results):
 
 
 def answer_question(question):
-    """Retrieve OTML context and generate Gemini answer with local fallback."""
-    retrieved_results = retrieve(question, top_k=3)
+    """
+    Retrieve OTML context and generate Gemini answer with local fallback.
+    Uses top_k=7 to provide more material for descriptive exam-style answers.
+    """
+    retrieved_results = retrieve(question, top_k=7)
     sources = get_unique_sources(retrieved_results)
 
     if not retrieved_results:
